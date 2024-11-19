@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMarket - Productos Ecológicos</title>
+  <link href="./src/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white font-sans">
+    
+    <!-- Navbar -->
+    <header class="bg-green-600 p-4 text-white text-center">
+        <!-- Navbar -->
+        <nav class="bg-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center">
+                        <img src="/img/logo.svg" alt="Logo EcoMarket" class="w-12 h-16 mr-2">
+                        <span class="text-xl font-semibold text-green-600"></span>
+                    </div>
+                    <div class="hidden md:flex space-x-4 justify-center items-center">
+                        <a href="/index.html" class="text-gray-800 hover:text-green-600">Inicio</a>
+                        <a href="productos.html" class="text-gray-800 hover:text-green-600">Productos</a>
+                        <a href="login.html"
+                            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Iniciar sesión</a>
+                        <a href="/pages/registrarse.html"
+                            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Registrarse</a>
+                    </div>
+                    <!-- Icono para menú móvil -->
+                    <div class="md:hidden">
+                        <button onclick="toggleMenu()" class="text-gray-800 hover:text-green-600 focus:outline-none">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Menú desplegable móvil -->
+            <div id="mobileMenu" class="hidden md:hidden">
+                <a href="/pages/productos.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Productos</a>
+                <a href="/pages/login.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Iniciar sesión</a>
+                <a href="#" class="block px-4 py-2 text-white bg-green-500 hover:bg-green-600">Registrarse</a>
+            </div>
+        </nav>
+    </header>
+
+<section class="relative w-full h-[3281px] bg-white">
+    <!-- Sección: Nuestro Compromiso -->
+    <div class="absolute left-[203px] top-[868px] flex flex-col items-center gap-5 h-60">
+        <h2 class="text-[32px] font-bold text-black font-sans text-center">Nuestro Compromiso</h2>
+        <p class="text-2xl font-normal text-black font-sans text-center">
+            Creemos en un futuro más verde. Trabajamos con productores locales y empresas sostenibles para ofrecerte una amplia gama de productos ecológicos. Además, te proporcionamos recursos educativos para que puedas tomar decisiones informadas y responsables.
+        </p>
+    </div>
+
+    <!-- Sección: Fondo Oscuro -->
+    <div class="absolute top-0 left-0 flex items-center justify-center w-full h-[812px] bg-black/20">
+        <div class="w-full h-full bg-black/25"></div>
+    </div>
+
+    <!-- Sección: Hero -->
+    <section class="absolute left-[279px] top-[347px] w-[995px]">
+        <h1 class="text-[32px] font-black text-[#e0f8e0] font-sans text-center">
+            Conecta con productos ecológicos y sostenibles, apoyando a productores locales y cuidando del medio ambiente.
+        </h1>
+        <p class="absolute left-0 top-[121px] text-xl font-normal text-white font-sans text-center w-[944px]">
+            En EcoMarket, queremos ayudarte a encontrar productos y servicios que cuiden del medio ambiente. Aquí puedes comprar alimentos orgánicos, productos reciclables y servicios de energía verde, todo de productores locales y empresas que se preocupan por la sostenibilidad.
+        </p>
+        <button class="absolute left-[293px] top-[273px] flex items-center justify-center w-[358px] h-16 bg-[#5dcb63] text-xl font-bold text-white font-sans rounded-full shadow">
+            Ver productos
+        </button>
+    </section>
+
+    <!-- Sección: Por qué elegir EcoMarket -->
+    <section class="absolute left-[191px] top-[1234px] w-[1129px]">
+        <h2 class="absolute left-[359px] top-0 text-[32px] font-bold text-black font-sans text-center">
+            ¿Por qué elegir EcoMarket?
+        </h2>
+        <p class="absolute left-[35px] top-[87px] text-2xl font-normal text-black font-sans text-center w-[1059px]">
+            ¡Elige EcoMarket y sé parte del cambio hacia un futuro más verde! Compra productos ecológicos, apoya a productores locales y cuida del medio ambiente con cada compra. 🌍💚
+        </p>
+
+        <!-- Tarjetas de Información -->
+        <div class="absolute left-0 top-[238px] flex items-center gap-[125px]">
+            <!-- Tarjeta 1 -->
+            <article class="relative w-[293px] h-[492px] border border-[#c3efc4] bg-white">
+                <div class="absolute top-0 left-0 w-full h-[254px] bg-[#d9d9d9] rounded-tl-md rounded-tr-md">
+                    <img class="absolute -top-[5px] -left-[8px] w-[318.48px] h-[271.92px] rounded-tl-md rounded-tr-md" src="https://via.placeholder.com/318x272" alt="Productos Sostenibles" />
+                </div>
+                <div class="absolute left-[15px] top-[269px]">
+                    <h3 class="text-xl font-semibold text-black font-sans text-center">Productos Sostenibles</h3>
+                    <p class="text-base font-normal text-black font-sans text-left">
+                        Todos nuestros productos son ecológicos y cumplen con altos estándares de sostenibilidad.
+                    </p>
+                </div>
+                <button class="absolute left-[15px] top-[409px] flex items-center justify-center w-[261px] h-[49px] bg-[#5dcb63] text-xl font-bold text-white font-sans rounded-full">
+                    Ver productos
+                </button>
+            </article>
+
+            <!-- Tarjeta 2 -->
+            <article class="relative w-[293px] h-[492px] border border-[#c3efc4] bg-white">
+                <div class="absolute top-0 left-0 w-full h-[254px] bg-[#d9d9d9] rounded-tl-md rounded-tr-md">
+                    <img class="absolute -top-[5px] -left-[8px] w-[318.48px] h-[271.92px] rounded-tl-md rounded-tr-md" src="https://via.placeholder.com/318x272" alt="Educación y Conciencia" />
+                </div>
+                <div class="absolute left-[15px] top-[269px]">
+                    <h3 class="text-xl font-semibold text-black font-sans text-left">Educación y Conciencia</h3>
+                    <p class="text-sm font-normal text-black font-sans text-left">
+                        Te ofrecemos información sobre los beneficios de los productos ecológicos y cómo puedes reducir tu huella ecológica.
+                    </p>
+                </div>
+                <button class="absolute left-[15px] top-[409px] flex items-center justify-center w-[261px] h-[49px] bg-[#5dcb63] text-xl font-bold text-white font-sans rounded-full">
+                    Ver productos
+                </button>
+            </article>
+
+            <!-- Tarjeta 3 -->
+            <article class="relative w-[293px] h-[492px] border border-[#c3efc4] bg-white">
+                <div class="absolute top-0 left-0 w-full h-[254px] bg-[#d9d9d9] rounded-tl-md rounded-tr-md">
+                    <img class="absolute -top-[5px] -left-[8px] w-[318.48px] h-[271.92px] rounded-tl-md rounded-tr-md" src="https://via.placeholder.com/318x272" alt="Apoyo a Productores Locales" />
+                </div>
+                <div class="absolute left-[15px] top-[269px]">
+                    <h3 class="text-xl font-semibold text-black font-sans text-center">Apoyo a Productores Locales</h3>
+                    <p class="text-base font-normal text-black font-sans text-left">
+                        Cada compra apoya a agricultores y fabricantes locales, fortaleciendo nuestra comunidad.
+                    </p>
+                </div>
+                <button class="absolute left-[15px] top-[409px] flex items-center justify-center w-[261px] h-[49px] bg-[#5dcb63] text-xl font-bold text-white font-sans rounded-full">
+                    Ver productos
+                </button>
+            </article>
+        </div>
+    </section>
+
+    <!-- Sección: Cómo puedes apoyar -->
+    <section class="absolute left-[195px] top-[2091px] w-[1162px]">
+        <div class="absolute left-[360px] top-0">
+            <h2 class="text-[32px] font-bold text-black font-sans text-left">¿Cómo puedes apoyar?</h2>
+            <div class="absolute top-[139px] flex items-start">
+                <span class="text-2xl font-semibold text-black font-sans">Compra en EcoMarket: </span>
+                <p class="text-2xl font-normal text-black font-sans">Cada compra contribuye a un futuro más sostenible.</p>
+            </div>
+            <div class="absolute top-[293px] flex items-start">
+                <span class="text-2xl font-semibold text-black font-sans">Comparte y Aprende: </span>
+                <p class="text-2xl font-normal text-black font-sans">Difunde la palabra y participa en nuestras iniciativas educativas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección: Footer -->
+    <footer class="absolute left-[89px] top-[3213px] w-full">
+        <div class="border-b border-[#cac4d0] w-full"></div>
+        <div class="absolute left-[452px] top-[21px] flex justify-between items-center w-[430px]">
+            <div class="flex items-center">
+                <span class="text-base text-[#4d4d4d] font-normal font-sans">© Derecho de autor - Ecomarket</span>
+                <span class="text-black text-[32px]">.</span>
+                <a href="#" class="text-base text-[#4d4d4d] font-normal font-sans">Términos y condiciones</a>
+            </div>
+        </div>
+    </footer>
+</section>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMarket - Productos Ecológicos</title>
+  <link href="./src/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white font-sans">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <img src="/img/logo.svg" alt="Logo EcoMarket" class="w-10 h-10 mr-2">
+          <span class="text-xl font-semibold text-green-600">EcoMarket</span>
+        </div>
+        <div class="hidden md:flex space-x-4 items-center">
+          <a href="/pages/productos.html" class="text-gray-800 hover:text-green-600">Productos</a>
+          <a href="/pages/login.html" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Iniciar sesión</a>
+          <a href="/pages/registrarse.html" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Registrarse</a>
+        </div>
+        <!-- Icono para menú móvil -->
+        <div class="md:hidden">
+          <button onclick="toggleMenu()" class="text-gray-800 hover:text-green-600 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Menú desplegable móvil -->
+    <div id="mobileMenu" class="hidden md:hidden">
+      <a href="/pages/productos.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Productos</a>
+      <a href="/pages/login.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Iniciar sesión</a>
+      <a href="#" class="block px-4 py-2 text-white bg-green-500 hover:bg-green-600">Registrarse</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-[url('/img/fondo.png')] bg-center h-96 bg-cover w-full py-12 text-center">
+    <div class=" ">
+    <h1 class="text-3xl font-bold text-white">Conecta con productos ecológicos y sostenibles</h1>
+    <p class="text-gray-100 mt-4 max-w-2xl mx-auto">Apoyando a productores locales y cuidando del medio ambiente.</p>
+    <button class="mt-6 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 m-6">Ver productos</button>
+  </div>
+  </section>
+
+  <!-- Compromiso Section -->
+  <img src="/img/icon1.png" alt="Icono compromiso" class="mx-auto mt-4 w-12 h-12">
+  <section class="py-12 text-center">
+    <h2 class="text-2xl font-semibold text-gray-800">Nuestro Compromiso</h2>
+    <p class="text-black mt-4 max-w-xl mx-auto">Creemos en un futuro más verde. Trabajamos con productores locales y empresas sostenibles para ofrecerte una amplia gama de productos ecológicos. Además, te proporcionamos recursos educativos para que puedas tomar decisiones informadas y responsables.</p>
+  </section>
+
+  <!-- Por qué elegir EcoMarket Section -->
+  <section class="py-12 bg-white">
+    <h2 class="text-center text-2xl font-semibold text-gray-800">¿Por qué elegir EcoMarket?</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto">
+      <div class="bg-gray-50 p-6 rounded-lg text-center shadow-md">
+        <img src="/img/producto1.png" alt="Productos Sostenibles" class="w-16 h-16 mx-auto mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">Productos Sostenibles</h3>
+        <p class="text-gray-600 mt-2">Productos amigables con el medio ambiente y comunidades.</p>
+        <button class="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Ver productos</button>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg text-center shadow-md">
+        <img src="/img/producto2.png" alt="Educación y Conciencia" class="w-16 h-16 mx-auto mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">Educación y Conciencia</h3>
+        <p class="text-gray-600 mt-2">Promovemos el conocimiento sobre sostenibilidad.</p>
+        <button class="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Ver productos</button>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg text-center shadow-md">
+        <img src="/img/producto3.png" alt="Apoyo a Productores Locales" class="w-16 h-16 mx-auto mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">Apoyo a Productores Locales</h3>
+        <p class="text-gray-600 mt-2">Apoyo directo a agricultores y pequeños productores.</p>
+        <button class="mt-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Ver productos</button>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- Impacto Positivo Section -->
+  <section class="py-12 text-center bg-white">
+    <h2 class="text-2xl font-semibold text-gray-800">Impacto Positivo</h2>
+    <div class="mt-8 grid gap-6 sm:grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto">
+      <div class="bg-gray-50 p-6 rounded-lg text-center shadow-md">
+        <img src="/img/icon2.png" alt="Innovación Sostenible" class="w-16 h-16 mx-auto mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">Innovación Sostenible</h3>
+        <p class="text-gray-600 mt-2">Fomentamos prácticas sostenibles para cuidar el medio ambiente.</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg text-center shadow-md">
+        <img src="/img/icon3.png" alt="Creación de Empleo" class="w-16 h-16 mx-auto mb-4">
+        <h3 class="text-lg font-semibold text-gray-800">Creación de Empleo</h3>
+        <p class="text-gray-600 mt-2">Generamos empleos locales para productores y artesanos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-gray-500">
+    <p>&copy; Derecho de autor - EcoMarket · <a href="#" class="hover:underline">Términos y condiciones</a></p>
+  </footer>
+
+  <!-- JavaScript para menú móvil -->
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("mobileMenu");
+      menu.classList.toggle("hidden");
+    }
+  </script>
+</body>
+</html>

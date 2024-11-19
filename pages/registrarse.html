@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro - EcoMarket</title>
+  <link href="./src/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Estilos adicionales, solo si es necesario */
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    
+  <header class="bg-green-600 p-4 text-white text-center">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <img src="/img/logo.svg" alt="Logo EcoMarket" class="w-12 h-16 mr-2">
+                    <span class="text-xl font-semibold text-green-600"></span>
+                </div>
+                <div class="hidden md:flex space-x-4 justify-center items-center">
+                    <a href="/index.html" class="text-gray-800 hover:text-green-600">Inicio</a>
+                    <a href="productos.html" class="text-gray-800 hover:text-green-600">Productos</a>
+                    <a href="login.html"
+                        class="bg-green-100 text-white px-4 py-2 rounded-lg hover:bg-green-600">Iniciar sesión</a>
+                    <a href="/pages/registrarse.html"
+                        class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Registrarse</a>
+                </div>
+                <!-- Icono para menú móvil -->
+                <div class="md:hidden">
+                    <button onclick="toggleMenu()" class="text-gray-800 hover:text-green-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú desplegable móvil -->
+        <div id="mobileMenu" class="hidden md:hidden">
+            <a href="/pages/productos.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Productos</a>
+            <a href="/pages/login.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Iniciar sesión</a>
+            <a href="#" class="block px-4 py-2 text-white bg-green-500 hover:bg-green-600">Registrarse</a>
+        </div>
+    </nav>
+</header>
+
+  <div class="container mx-auto p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-lg shadow-md overflow-hidden">
+      
+      <!-- Imagen - Oculta en pantallas móviles -->
+      <div class="hidden md:flex items-center justify-center bg-cover bg-center" style="background-image: url('/img/fondo.png');">
+        <!-- Puedes colocar el contenido de la imagen aquí si es necesario -->
+      </div>
+
+      <!-- Formulario -->
+      <div class="p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">¡Bienvenido a nuestra comunidad!</h2>
+        <p class="text-center mb-4 text-gray-600">Regístrate para adquirir nuestros productos orgánicos 100% frescos.</p>
+        <button class="w-full py-2 bg-green-500 text-white rounded-lg mb-4">Continua con Google</button>
+        <div class="flex items-center justify-center mb-4">
+          <span class="w-1/5 border-b border-gray-300"></span>
+          <span class="text-gray-500 mx-2">o regístrate con</span>
+          <span class="w-1/5 border-b border-gray-300"></span>
+        </div>
+        <form id="registrationForm" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="text" name="nombre" placeholder="Nombre" class="border rounded px-3 py-2" required>
+            <input type="text" name="apellido" placeholder="Apellido" class="border rounded px-3 py-2" required>
+          </div>
+          <input type="text" name="username" placeholder="Nombre de usuario" class="w-full border rounded px-3 py-2" required>
+          <input type="email" name="correo" placeholder="Correo" class="w-full border rounded px-3 py-2" required>
+          <input type="text" name="telefono" placeholder="Número de celular" class="w-full border rounded px-3 py-2" required>
+          <input type="text" name="direccion" placeholder="Dirección" class="w-full border rounded px-3 py-2" required>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input type="password" name="contrasena" placeholder="Contraseña" class="border rounded px-3 py-2" required>
+            <input type="password" name="confirmar_contrasena" placeholder="Confirmar contraseña" class="border rounded px-3 py-2" required>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" id="terms" class="mr-2" required>
+            <label for="terms" class="text-sm text-gray-700">Aceptar términos y condiciones</label>
+          </div>
+          <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg">Registrarse</button>
+        </form>
+        <p class="text-center text-sm text-gray-500 mt-4">¿Ya tienes una cuenta? <a href="#" class="text-green-500">Ingresar</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      // Aquí puedes agregar la lógica para enviar los datos a tu base de datos
+      alert('Registro exitoso');
+    });
+  </script>
+
+<footer class="bg-green-600 p-4 text-white text-center mt-4">
+  <p>&copy; 2024 Tienda de Alimentos. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>

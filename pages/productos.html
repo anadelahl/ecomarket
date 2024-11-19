@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Alimentos</title>
+    <link href="./src/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = [];
+            const cartElement = document.getElementById('cart');
+            const productCards = document.querySelectorAll('.product-card');
+            const categoryFilters = document.querySelectorAll('.category-filter');
+            const filterInput = document.getElementById('filter');
+
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    const category = filter.dataset.category;
+                    productCards.forEach(card => {
+                        if (category === 'all' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            filterInput.addEventListener('input', (e) => {
+                const filterValue = e.target.value.toLowerCase();
+                productCards.forEach(card => {
+                    const productName = card.querySelector('.product-name').textContent.toLowerCase();
+                    if (productName.includes(filterValue)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            productCards.forEach(card => {
+                const addButton = card.querySelector('.add-to-cart');
+                const buyButton = card.querySelector('.buy-now');
+                const incrementButton = card.querySelector('.increment');
+                const decrementButton = card.querySelector('.decrement');
+                const quantityElement = card.querySelector('.quantity');
+                let quantity = 0;
+
+                incrementButton.addEventListener('click', () => {
+                    quantity++;
+                    quantityElement.textContent = quantity;
+                });
+
+                decrementButton.addEventListener('click', () => {
+                    if (quantity > 0) {
+                        quantity--;
+                        quantityElement.textContent = quantity;
+                    }
+                });
+
+                addButton.addEventListener('click', () => {
+                    if (quantity > 0) {
+                        const productName = card.querySelector('.product-name').textContent;
+                        const productPrice = card.querySelector('.product-price').textContent;
+                        cart.push({ name: productName, price: productPrice, quantity: quantity });
+                        updateCart();
+                    }
+                });
+
+                buyButton.addEventListener('click', () => {
+                    if (quantity > 0) {
+                        alert(`Has comprado ${quantity} de ${card.querySelector('.product-name').textContent}`);
+                        quantity = 0;
+                        quantityElement.textContent = quantity;
+                    }
+                });
+            });
+
+            function updateCart() {
+                cartElement.innerHTML = '';
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'flex justify-between p-2 border-b';
+                    cartItem.innerHTML = `<span>${item.name} x ${item.quantity}</span><span>${item.price}</span>`;
+                    cartElement.appendChild(cartItem);
+                });
+            }
+        });
+    </script>
+</head>
+
+<body class="bg-gray-100">
+    <header class="bg-green-600 p-4 text-white text-center">
+        <!-- Navbar -->
+        <nav class="bg-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center">
+                        <img src="/img/logo.svg" alt="Logo EcoMarket" class="w-12 h-16 mr-2">
+                        <span class="text-xl font-semibold text-green-600"></span>
+                    </div>
+                    <div class="hidden md:flex space-x-4 justify-center items-center">
+                        <a href="/index.html" class="text-gray-800 hover:text-green-600">Inicio</a>
+                        <a href="productos.html" class="text-gray-800 hover:text-green-600">Productos</a>
+                        <a href="login.html"
+                            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Iniciar sesión</a>
+                        <a href="/pages/registrarse.html"
+                            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Registrarse</a>
+                    </div>
+                    <!-- Icono para menú móvil -->
+                    <div class="md:hidden">
+                        <button onclick="toggleMenu()" class="text-gray-800 hover:text-green-600 focus:outline-none">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Menú desplegable móvil -->
+            <div id="mobileMenu" class="hidden md:hidden">
+                <a href="/pages/productos.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Productos</a>
+                <a href="/pages/login.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Iniciar sesión</a>
+                <a href="#" class="block px-4 py-2 text-white bg-green-500 hover:bg-green-600">Registrarse</a>
+            </div>
+        </nav>
+    </header>
+    <main class="container mx-auto p-4">
+        <div class="flex flex-col md:flex-row">
+            <aside class="w-full md:w-1/4 p-4 bg-white rounded-lg shadow-md mb-4 md:mb-0">
+                <h2 class="text-xl font-bold mb-4">Categorías</h2>
+                <ul>
+                    <li class="category-filter cursor-pointer p-2" data-category="all">Todos</li>
+                    <li class="category-filter cursor-pointer p-2" data-category="fruits">Frutas</li>
+                    <li class="category-filter cursor-pointer p-2" data-category="vegetables">Verduras</li>
+                    <!-- Agrega más categorías según sea necesario -->
+                </ul>
+            </aside>
+            <div class="w-full md:w-3/4 p-4">
+                <div class="mb-4">
+                    <input type="text" id="filter" class="w-full p-2 border border-gray-300 rounded"
+                        placeholder="Filtrar productos...">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Producto 1 -->
+                    <div class="product-card bg-white p-4 rounded-lg shadow-md" data-category="vegetables">
+                        <img src="/img/aji.jpg" alt="Producto 1" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4">
+                            <h2 class="product-name text-xl font-bold">Ají</h2>
+                            <p class="text-gray-700">Descripción del producto 1.</p>
+                            <p class="product-price text-green-600 font-bold mt-2">$10.00</p>
+                            <div class="flex items-center mt-2">
+                                <button class="decrement bg-gray-300 text-gray-700 px-2 py-1 rounded">-</button>
+                                <span class="quantity mx-2">0</span>
+                                <button class="increment bg-gray-300 text-gray-700 px-2 py-1 rounded">+</button>
+                            </div>
+                            <div class="flex space-x-4">
+                                
+                                    <!-- Botón de Añadir al carrito (ajustado) -->
+                                    <div class="flex space-x-4 mt-4">
+                                        <!-- Botón de Carrito solo con icono -->
+                                        <button
+                                            class="flex items-center justify-center bg-white border border-green-500 text-green-500 hover:bg-green-100 rounded-md p-2">
+                                            <!-- Icono del carrito -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor" class="w-8 h-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6m1.2-6L5.4 5m1.6 8h13.6m-2 2a2 2 0 11-4 0 2 2 0 014 0zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                                            </svg> Añadir al carrito
+                                        </button>
+
+                                        <!-- Botón de Comprar (ajustado) -->
+                                        <button
+                                            class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-3 rounded-md text-sm w-auto h-auto">
+                                            Comprar
+                                        </button>
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Producto 2 -->
+                    <div class="product-card bg-white p-4 rounded-lg shadow-md" data-category="vegetables">
+                        <img src="/img/cebolla.jpg" alt="Producto 2" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4">
+                            <h2 class="product-name text-xl font-bold">Cebolla</h2>
+                            <p class="text-gray-700">Descripción del producto 2.</p>
+                            <p class="product-price text-green-600 font-bold mt-2">$15.00</p>
+                            <div class="flex items-center mt-2">
+                                <button class="decrement bg-gray-300 text-gray-700 px-2 py-1 rounded">-</button>
+                                <span class="quantity mx-2">0</span>
+                                <button class="increment bg-gray-300 text-gray-700 px-2 py-1 rounded">+</button>
+                            </div>
+                            <!-- Botón de Añadir al carrito (ajustado) -->
+                            <div class="flex space-x-4 mt-4">
+                                <!-- Botón de Carrito solo con icono -->
+                                <button
+                                    class="flex items-center justify-center bg-white border border-green-500 text-green-500 hover:bg-green-100 rounded-md p-2">
+                                    <!-- Icono del carrito -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" class="w-8 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6m1.2-6L5.4 5m1.6 8h13.6m-2 2a2 2 0 11-4 0 2 2 0 014 0zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg> Añadir al carrito
+                                </button>
+
+                                <!-- Botón de Comprar (ajustado) -->
+                                <button
+                                    class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-3 rounded-md text-sm w-auto h-auto">
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Producto 3 -->
+                    <div class="product-card bg-white p-4 rounded-lg shadow-md" data-category="vegetables">
+                        <img src="/img/zanahoria.jpg" alt="Producto 3" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4">
+                            <h2 class="product-name text-xl font-bold">Zanahoria</h2>
+                            <p class="text-gray-700">Descripción del producto 3.</p>
+                            <p class="product-price text-green-600 font-bold mt-2">$20.00</p>
+                            <div class="flex items-center mt-2">
+                                <button class="decrement bg-gray-300 text-gray-700 px-2 py-1 rounded">-</button>
+                                <span class="quantity mx-2">0</span>
+                                <button class="increment bg-gray-300 text-gray-700 px-2 py-1 rounded">+</button>
+                            </div>
+                            <!-- Botón de Añadir al carrito (ajustado) -->
+                            <div class="flex space-x-4 mt-4">
+                                <!-- Botón de Carrito solo con icono -->
+                                <button
+                                    class="flex items-center justify-center bg-white border border-green-500 text-green-500 hover:bg-green-100 rounded-md p-2">
+                                    <!-- Icono del carrito -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" class="w-8 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6m1.2-6L5.4 5m1.6 8h13.6m-2 2a2 2 0 11-4 0 2 2 0 014 0zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg> Añadir al carrito
+                                </button>
+
+                                <!-- Botón de Comprar (ajustado) -->
+                                <button
+                                    class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-3 rounded-md text-sm w-auto h-auto">
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Producto 4 -->
+                    <div class="product-card bg-white p-4 rounded-lg shadow-md" data-category="fruits">
+                        <img src="/img/fresas.webp" alt="Producto 3" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4">
+                            <h2 class="product-name text-xl font-bold">Zanahoria</h2>
+                            <p class="text-gray-700">Descripción del producto 3.</p>
+                            <p class="product-price text-green-600 font-bold mt-2">$20.00</p>
+                            <div class="flex items-center mt-2">
+                                <button class="decrement bg-gray-300 text-gray-700 px-2 py-1 rounded">-</button>
+                                <span class="quantity mx-2">0</span>
+                                <button class="increment bg-gray-300 text-gray-700 px-2 py-1 rounded">+</button>
+                            </div>
+                            <!-- Botón de Añadir al carrito (ajustado) -->
+                            <div class="flex space-x-4 mt-4">
+                                <!-- Botón de Carrito solo con icono -->
+                                <button
+                                    class="flex items-center justify-center bg-white border border-green-500 text-green-500 hover:bg-green-100 rounded-md p-2">
+                                    <!-- Icono del carrito -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" class="w-8 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6m1.2-6L5.4 5m1.6 8h13.6m-2 2a2 2 0 11-4 0 2 2 0 014 0zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg> Añadir al carrito
+                                </button>
+
+                                <!-- Botón de Comprar (ajustado) -->
+                                <button
+                                    class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-3 rounded-md text-sm w-auto h-auto">
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Producto 5 -->
+                    <div class="product-card bg-white p-4 rounded-lg shadow-md" data-category="fruits">
+                        <img src="/img/manzana.jpg" alt="Producto 3" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4">
+                            <h2 class="product-name text-xl font-bold">Zanahoria</h2>
+                            <p class="text-gray-700">Descripción del producto 3.</p>
+                            <p class="product-price text-green-600 font-bold mt-2">$20.00</p>
+                            <div class="flex items-center mt-2">
+                                <button class="decrement bg-gray-300 text-gray-700 px-2 py-1 rounded">-</button>
+                                <span class="quantity mx-2">0</span>
+                                <button class="increment bg-gray-300 text-gray-700 px-2 py-1 rounded">+</button>
+                            </div>
+                            <!-- Botón de Añadir al carrito (ajustado) -->
+                            <div class="flex space-x-4 mt-4">
+                                <!-- Botón de Carrito solo con icono -->
+                                <button
+                                    class="flex items-center justify-center bg-white border border-green-500 text-green-500 hover:bg-green-100 rounded-md p-2">
+                                    <!-- Icono del carrito -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" class="w-8 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6m1.2-6L5.4 5m1.6 8h13.6m-2 2a2 2 0 11-4 0 2 2 0 014 0zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg> Añadir al carrito
+                                </button>
+
+                                <!-- Botón de Comprar (ajustado) -->
+                                <button
+                                    class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-3 rounded-md text-sm w-auto h-auto">
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Producto 6 -->
+                    <div class="product-card bg-white p-4 rounded-lg shadow-md" data-category="vegetables">
+                        <img src="/img/Platano.png" alt="Producto 3" class="w-full h-48 object-cover rounded-t-lg">
+                        <div class="p-4">
+                            <h2 class="product-name text-xl font-bold">Zanahoria</h2>
+                            <p class="text-gray-700">Descripción del producto 3.</p>
+                            <p class="product-price text-green-600 font-bold mt-2">$20.00</p>
+                            <div class="flex items-center mt-2">
+                                <button class="decrement bg-gray-300 text-gray-700 px-2 py-1 rounded">-</button>
+                                <span class="quantity mx-2">0</span>
+                                <button class="increment bg-gray-300 text-gray-700 px-2 py-1 rounded">+</button>
+                            </div>
+                            <!-- Botón de Añadir al carrito (ajustado) -->
+                            <div class="flex space-x-4 mt-4">
+                                <!-- Botón de Carrito solo con icono -->
+                                <button
+                                    class="flex items-center justify-center bg-white border border-green-500 text-green-500 hover:bg-green-100 rounded-md p-2">
+                                    <!-- Icono del carrito -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" class="w-8 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6m1.2-6L5.4 5m1.6 8h13.6m-2 2a2 2 0 11-4 0 2 2 0 014 0zm-8 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg> Añadir al carrito
+                                </button>
+
+                                <!-- Botón de Comprar (ajustado) -->
+                                <button
+                                    class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1.5 px-3 rounded-md text-sm w-auto h-auto">
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Agrega más productos según sea necesario -->
+                </div>
+            </div>
+        </div>
+        <footer class="bg-green-600 p-4 text-white text-center mt-4">
+            <p>&copy; 2024 Tienda de Alimentos. Todos los derechos reservados.</p>
+        </footer>
+</body>
+
+</html>
